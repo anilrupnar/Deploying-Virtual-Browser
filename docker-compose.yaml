@@ -1,7 +1,7 @@
 version: "3"
 services:
   neko:
-    image: "anilrupnar/vb:tor"
+    image: "anilrupnar/vb:latest"
     restart: "unless-stopped"
     shm_size: "2gb"
     ports:
