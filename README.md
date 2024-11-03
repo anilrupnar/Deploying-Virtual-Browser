@@ -32,11 +32,11 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
 - **Trivy**: Vulnerability scanning for Docker images.
 - **Docker Compose**: Multi-container Docker applications.
 
-### Setup Instructions
+# Setup Instructions
 
-### 1 create EC2 Instance & security Groups 
+# 1 create EC2 Instance & security Groups 
 
-### 1. Sign in to AWS
+## 1. Sign in to AWS
 
 1. Access the [AWS Management Console](https://aws.amazon.com/console/) and log in with your credentials.
 
