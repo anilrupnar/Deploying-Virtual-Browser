@@ -1,7 +1,7 @@
 version: "3"
 services:
   neko:
-    image: "harimohan8/test2:tor"
+    image: "anilrupnar/test2:tor"
     restart: "unless-stopped"
     shm_size: "2gb"
     ports:
