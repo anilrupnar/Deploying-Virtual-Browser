@@ -291,7 +291,7 @@ Now, we need to add the SonarQube token as a credential in Jenkins, as well as c
      - **Description**: `SonarQube token`
    - Click **Create** to finalize. Your SonarQube token is now added as a credential in Jenkins.
 
-      ![Sonar token ]( )
+      ![Sonar token ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/sonarqube%20token%20genrate.png )
 
 2. **Add Docker Credentials in Jenkins**:
    - Add credentials for Docker to enable Jenkins to push Docker images to a repository:
@@ -312,7 +312,7 @@ Now, we need to add the SonarQube token as a credential in Jenkins, as well as c
        - **Server authentication token**: `sonar-token` (select the SonarQube token created earlier)
      - Click **Apply** to save the changes.
    
-   ![Jenkins server ]( )
+   ![Jenkins server ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Jenkins%20server%20.png)
 
 
 Your SonarQube and Docker credentials are now configured in Jenkins, and SonarQube is integrated with Jenkins to enable code quality analysis in your pipelines.
@@ -512,7 +512,7 @@ sudo apt-get install trivy -y
 ```
 ## Stage 11: Now build Pipline
 
-![Build stage optput](link_to_screenshot)
+![Build stage optput](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Build%20stage%20optput.png)
 
 ## Stage 12: Final Deployment Steps
 
@@ -557,7 +557,7 @@ Now for the last and final test: whether our browser is working or not.
 
 Once logged in, it should look like this:
 
-![Final Output 3](link_to_screenshot)
+![Final Output 3](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Final%20Output%203.png)
 
 ## Login Credentials
 
@@ -565,12 +565,13 @@ Once logged in, it should look like this:
 - **Password**: admin
 
    
-![Final Output 1](link_to_screenshot)
+![Final Output 1](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Final%20Output%202.png)
 
-![Final Output 2](link_to_screenshot)
 
 Additionally, check SonarQube to see if there is something new.
-![SonarQube Report](link_to_screenshot)
+
+![SonarQube Report](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/SonarQube%20Report.png)
+
 Finally, the project is done!
 
 
