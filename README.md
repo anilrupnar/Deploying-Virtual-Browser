@@ -357,7 +357,7 @@ pipeline {
         stage('git-Checkout') {
             steps {
                
-                    git branch: 'main', url: 'https://github.com/anilrupnar/Virtual-Browser01.git'
+                    git branch: 'main', url: 'https://github.com/anilrupnar/Deploying-Virtual-Browser.git'
                
             }
         }
@@ -445,7 +445,7 @@ pipeline {
         stage('git-Checkout') {
             steps {
                
-                    git branch: 'main', url: 'https://github.com/anilrupnar/Virtual-Browser01.git'
+                    git branch: 'main', url: 'https://github.com/anilrupnar/Deploying-Virtual-Browser.git'
                
             }
         }
@@ -552,7 +552,85 @@ stage("Deploy") {
     }
 }
 ```
-## Stage 13: Final stage 
+## Stage 14: Final Pipline Code 
+```bash
+   pipeline {
+    agent any
+
+
+   environment {
+        SCANNER_HOME = tool 'sonar-scanner'
+        
+    }
+
+
+   stages {
+        stage('git-Checkout') {
+            steps {
+               
+                    git branch: 'main', url: 'https://github.com/anilrupnar/Virtual-Browser01.git'
+               
+            }
+        }
+
+
+       stage('Owasp Dependency Check') {
+            steps {
+                script {
+                    dependencyCheck additionalArguments: '--scan ./', odcInstallation: 'DC'
+                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                }
+            }
+        }
+
+       stage('SonarQube') {
+            steps {
+                script {
+                    withSonarQubeEnv('sonar') {
+                        sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=VirtualBrowser -Dsonar.projectName=VirtualBrowser"
+                    }
+                }
+            }
+        }
+        
+       stage('Docker Build and Tag') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'Docker') {
+                        dir('/var/lib/jenkins/workspace/Virtual-Browser/.docker/tor-browser')  {
+                            sh "docker build -t anilrupnar/vb:latest ."
+                        }
+                    }
+                }
+            }
+        }
+          
+        stage("Trivy Docker Scan"){
+            steps{
+                sh "trivy image anilrupnar/vb:latest > trivy.txt" 
+            }
+        }  
+          
+        stage('Docker Build & Push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'Docker') {
+                        sh "docker push anilrupnar/vb:latest"
+                    }
+                }
+            }
+        }
+        stage("Deploy"){
+            steps{
+                sh "docker-compose up --verbose -d" 
+            }
+        }
+
+    }
+}    
+    
+```
+## Stage 14: Final stage 
 
 Now for the last and final test: whether our browser is working or not.
 
