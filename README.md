@@ -155,6 +155,78 @@ Now, let’s install some plugins in Jenkins:
 - Docker Build Step
 - Cloud Bees Docker Build and Publish
 
+# Step 4: Install Docker and Set Up SonarQube
+
+Since Docker isn’t installed on our EC2 instance yet, let’s install Docker and Docker Compose, then set up SonarQube for code analysis.
+
+1. **Install Docker**:
+   - Run the command to install Docker:
+     ```bash
+     sudo apt install docker  # Install Docker
+     ```
+
+2. **Install Docker Compose**:
+   - Next, install Docker Compose by running the command:
+     ```bash
+     sudo apt install docker-compose  # Install Docker Compose
+     ```
+
+3. **Adjust Docker Permissions**:
+   - After installing Docker Compose, execute the following command to adjust permissions for other users to access the Docker socket:
+     ```bash
+     sudo chmod 666 /var/run/docker.sock  # Grant access to Docker socket
+     ```
+
+4. **Install SonarQube**:
+   - Now, set up SonarQube on our EC2 instance using Docker with the following command:
+     ```bash
+     docker run -d -p 9000:9000 sonarqube:lts-community  # Run SonarQube container
+     ```
+   - This command starts a SonarQube server in detached mode, mapping port 9000 on the host to port 9000 on the container. This setup enables us to perform code analysis and quality checks.
+
+5. **Access SonarQube**:
+   - You can access SonarQube’s web interface at `http://localhost:9000` or by replacing `localhost` with your EC2 instance's public IP address if accessing it remotely.
+   
+   Example: `http://publicIP:9000`
+
+   SonarQube will be available on port 9000, allowing you to perform code quality analysis on your projects.
+
+# Step 5: Configure Docker, Dependency-Check, and SonarQube Scanner in Jenkins
+
+Now that Docker and SonarQube are installed on our EC2 instance, let’s configure them through Jenkins.
+
+1. **Configure Docker**:
+   - Navigate to the Jenkins Dashboard.
+   - Select `Manage Jenkins` -> `Global Tool Configuration`.
+   - Scroll down to **Docker** and configure it as follows:
+     - **Name**: `docker`
+     - Check “Install automatically”
+     - Select “Download from docker.com”
+
+2. **Configure Dependency-Check**:
+   - In the same **Global Tool Configuration** section, configure **Dependency-Check** as follows:
+     - **Name**: `DC`
+     - Check “Install automatically”
+     - Select “Install from GitHub”
+     - **Version**: `6.5.1`
+
+3. **Configure SonarQube Scanner**:
+   - Still in the **Global Tool Configuration** section, configure **SonarQube Scanner** as follows:
+     - **Name**: `sonar`
+     - Check “Install automatically”
+     - Select “Install from Maven Central”
+     - **Version**: `5.0.1.3006`
+
+4. **Apply the Configuration**:
+   - Once all configurations are set, click on **Apply** to save the changes.
+
+5. **Verify SonarQube is Running**:
+   - To confirm that SonarQube is running on the EC2 instance, execute the following command:
+     ```bash
+     docker ps  # Check if the SonarQube container is running
+     ```
+This completes the configuration of Docker, Dependency-Check, and SonarQube Scanner in Jenkins. You can now use these tools within Jenkins for your CI/CD workflows.
+
 
 
 
