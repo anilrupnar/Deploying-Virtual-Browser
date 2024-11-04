@@ -239,8 +239,10 @@ Now we will configure the SonarQube server in Jenkins.
    - The default SonarQube username and password are:
      - **Username**: `admin`
      - **Password**: `admin`
-
-3. **Generate a SonarQube Token**:
+ 
+    ![Sonarqube login ]( )
+   
+4. **Generate a SonarQube Token**:
    - Once logged in, follow these steps:
      - Go to **Administration**.
      - Select **Security**.
@@ -249,8 +251,12 @@ Now we will configure the SonarQube server in Jenkins.
      - Assign a name to the token.
      - Click on **Generate Token** to create it.
 
-4. **Copy the Token**:
+      ![sonarqube token genrate ]( )
+   
+5. **Copy the Token**:
    - After generating the token, copy it. This token will be needed for integrating SonarQube with Jenkins in the next steps.
+
+     ![sonarqube token copy ]( )
 
 This token allows Jenkins to authenticate with your SonarQube server and perform code quality checks on your projects.
 
@@ -267,6 +273,8 @@ Now, we need to add the SonarQube token as a credential in Jenkins, as well as c
      - **ID**: `sonar-token`
      - **Description**: `SonarQube token`
    - Click **Create** to finalize. Your SonarQube token is now added as a credential in Jenkins.
+
+      ![Sonar token ]( )
 
 2. **Add Docker Credentials in Jenkins**:
    - Add credentials for Docker to enable Jenkins to push Docker images to a repository:
@@ -287,7 +295,7 @@ Now, we need to add the SonarQube token as a credential in Jenkins, as well as c
        - **Server authentication token**: `sonar-token` (select the SonarQube token created earlier)
      - Click **Apply** to save the changes.
    
-   ![Jenkins server ](https://github.com/user-attachments/assets/7eaa83ba-0eaf-4dd7-8317-c7a44d5596bd)
+   ![Jenkins server ]( )
 
 
 Your SonarQube and Docker credentials are now configured in Jenkins, and SonarQube is integrated with Jenkins to enable code quality analysis in your pipelines.
