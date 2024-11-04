@@ -484,6 +484,7 @@ sudo apt-get install trivy -y
 ```
 ## Stage 11: Now build Pipline
 
+![Build stage optput](link_to_screenshot)
 
 ## Stage 12: Final Deployment Steps
 
@@ -495,7 +496,7 @@ To finalize the deployment and use the latest Docker image, update the `docker-c
 version: "3"
 services:
   neko:
-    image: "harimohan8/virtual:latest"
+    image: "anilrupnar/vb:latest"
     restart: "unless-stopped"
     shm_size: "2gb"
     ports:
@@ -519,19 +520,41 @@ stage("Deploy") {
     }
 }
 ```
+## Stage 13: Final stage 
+
+Now for the last and final test: whether our browser is working or not.
+
+1. Copy the public IP address with port `8082` of the EC2 instance.
+2. Paste it into your local browser’s address bar.
+
+Once logged in, it should look like this:
+
+![Final Output 3](link_to_screenshot)
+
+## Login Credentials
+
+- **Username**: neko
+- **Password**: admin
+
+   
+![Final Output 1](link_to_screenshot)
+
+![Final Output 2](link_to_screenshot)
+
+Additionally, check SonarQube to see if there is something new.
+![SonarQube Report](link_to_screenshot)
+Finally, the project is done!
 
 
 
 ---
+**Thank you for reading my README file! 😊**
 
-## Contact
+**Feel free to connect with me:**
 
-For further assistance, please contact:
-
-- **LinkedIn**: [Anil Rupnar](https://www.linkedin.com/in/anil-rupnar/)
+- **LinkedIn**: [Anil Rupnar](https://www.linkedin.com/in/anilrupnar/)
 - **Email**: anilrupnar2003@gmail.com
-  
----
+
 
 
 
