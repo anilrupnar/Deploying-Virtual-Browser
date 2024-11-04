@@ -286,6 +286,9 @@ Now, we need to add the SonarQube token as a credential in Jenkins, as well as c
        - **URL**: `<Public IP>:9000` (replace `<Public IP>` with your EC2 instance’s public IP address)
        - **Server authentication token**: `sonar-token` (select the SonarQube token created earlier)
      - Click **Apply** to save the changes.
+   
+   ![Jenkins server ](https://github.com/user-attachments/assets/7eaa83ba-0eaf-4dd7-8317-c7a44d5596bd)
+
 
 Your SonarQube and Docker credentials are now configured in Jenkins, and SonarQube is integrated with Jenkins to enable code quality analysis in your pipelines.
 
