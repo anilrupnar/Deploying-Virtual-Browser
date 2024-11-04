@@ -554,7 +554,7 @@ stage("Deploy") {
     }
 }
 ```
-## Stage 14: Final Pipline Code 
+## Stage 13: Final Pipline Code 
 ```bash
    pipeline {
     agent any
@@ -652,7 +652,7 @@ Once logged in, it should look like this:
 ![Final Output 1](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Final%20Output%202.png)
 
 
-Additionally, check SonarQube to see if there is something new.
+## check SonarQube Report
 
 ![SonarQube Report](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/SonarQube%20Report.png)
 
