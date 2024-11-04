@@ -289,6 +289,96 @@ Now, we need to add the SonarQube token as a credential in Jenkins, as well as c
 
 Your SonarQube and Docker credentials are now configured in Jenkins, and SonarQube is integrated with Jenkins to enable code quality analysis in your pipelines.
 
+## Step 8: Setting Up the Jenkins Pipeline
+
+To set up the Jenkins pipeline for the **Virtual Browser** project, follow these steps:
+
+1. **Open Jenkins Dashboard:**
+   - Go to your Jenkins dashboard.
+
+2. **Create a New Pipeline Job:**
+   - Click on **"New Item"** in the upper-left corner of the dashboard.
+
+3. **Configure Pipeline Job:**
+   - In the **"Enter an item name"** field, type **"Virtual Browser"** as the project name.
+   - Select **"Pipeline"** as the project type.
+   - Click **"OK"** to proceed.
+   
+This will create a new Pipeline job in Jenkins for the **Virtual Browser** project. Continue with your pipeline script setup and stage configurations in subsequent steps.
+
+
+## Step 9: Add Docker Build, Trivy Scan, and Docker Push Stages to the Pipeline
+
+Now that we have configured Git, OWASP Dependency Check, and SonarQube in the pipeline, we will extend the pipeline to include Docker build, Trivy scan, and Docker push stages.
+```groovy
+pipeline {
+    agent any
+
+
+   environment {
+        SCANNER_HOME = tool 'sonar-scanner'
+        
+    }
+
+
+   stages {
+        stage('git-Checkout') {
+            steps {
+               
+                    git branch: 'main', url: 'https://github.com/anilrupnar/Virtual-Browser01.git'
+               
+            }
+        }
+
+
+       stage('Owasp Dependency Check') {
+            steps {
+                script {
+                    dependencyCheck additionalArguments: '--scan ./', odcInstallation: 'DC'
+                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                }
+            }
+        }
+
+       stage('SonarQube') {
+            steps {
+                script {
+                    withSonarQubeEnv('sonar') {
+                        sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=VirtualBrowser -Dsonar.projectName=VirtualBrowser"
+                    }
+                }
+            }
+        }
+   }
+}
+
+```
+### Pipeline Declaration
+- `pipeline { … }`: Defines the Jenkins Pipeline.
+
+### Agent Directive
+- `agent any`: Specifies the pipeline can run on any available agent.
+
+### Environment Variables
+- `environment { … }`: Defines environment variables for the pipeline.
+- `SCANNER_HOME = tool 'sonar'`: Sets the `SCANNER_HOME` variable to the location of the SonarQube scanner tool installed on the Jenkins server.
+
+### Stages
+- `stages { … }`: Contains the different stages of the pipeline.
+
+### Stage: Git-checkout
+- `stage('Git-checkout') { … }`: Checks out the code from a Git repository.
+- `git branch: 'main', url: 'https://github.com/harimohan886/virtual-browser.git'`: Uses the Git plugin to pull code from the specified repository URL and branch.
+
+### Stage: Owasp Dependency Check
+- `stage('Owasp Dependency Check') { … }`: Runs an OWASP Dependency-Check on the project.
+- `dependencyCheck additionalarguments: ' --scan ./--disableNodeAudit', odcInstallation: 'DC'`: Executes the Dependency-Check plugin with additional arguments for scanning and disabling the Node.js audit.
+- `dependencyCheckPublisher pattern: '**/dependency-check-report.xml'`: Specifies the pattern for the Dependency-Check report.
+
+### Stage: SonarQube
+- `stage("SonarQube") { … }`: Runs SonarQube analysis on the project.
+- `withSonarQubeEnv('sonar') { … }`: Configures the SonarQube environment using the server setup named `sonar`.
+- `sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectkey=VirtualBrowser -Dsonar.projectName=VirtualBrowser'''`: Runs the SonarQube scanner with the specified project key and name.
 
 
 
