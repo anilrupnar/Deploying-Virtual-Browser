@@ -69,7 +69,9 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
 2. Choose the desired key pair from the dropdown list.
 3. Ensure you have access to the selected private key file.
 4. Click **Launch Instances** to create the instance.
-   ![EC2 Instance ]( )
+
+![EC2 Instance ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/EC2%20Instance.png)
+
 ### 6. Configure Security Group
 
 1. **Select or Create a Security Group**:
@@ -131,7 +133,7 @@ Before installing Jenkins, ensure that the Java Development Kit (JDK) is install
      ```bash
      wget https://get.jenkins.io/war-stable/2.426.2/jenkins.war  # Download Jenkins WAR file
      ```
-     ![Jenkins WAR ]( )
+ ![Jenkins WAR ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Jenkins%20WAR.png)
      
    - Run Jenkins using Java:
      ```bash
@@ -146,7 +148,7 @@ Before installing Jenkins, ensure that the Java Development Kit (JDK) is install
    
    After entering the IP address followed by `:8081` in the browser, the login page will appear, prompting for a password.
    
-   ![login page ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/login%20page.png )
+ ![login page ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/login%20page.png )
    
 To retrieve the password:
    ```bash
@@ -166,7 +168,7 @@ Now, let’s install some plugins in Jenkins:
 - Docker Build Step
 - Cloud Bees Docker Build and Publish
 
-![Install Plugins in Jenkins ]( )
+![Install Plugins in Jenkins ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Install%20Plugins%20in%20Jenkins.png)
 
 ## Step 4: Install Docker and Set Up SonarQube
 
@@ -197,7 +199,7 @@ Since Docker isn’t installed on our EC2 instance yet, let’s install Docker a
      ```
    - This command starts a SonarQube server in detached mode, mapping port 9000 on the host to port 9000 on the container. This setup enables us to perform code analysis and quality checks.
      
-     ![Docker Output ]( )
+  ![Docker Output ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/docker%209000.png )
 
 5. **Access SonarQube**:
    - You can access SonarQube’s web interface at `http://localhost:9000` or by replacing `localhost` with your EC2 instance's public IP address if accessing it remotely.
@@ -272,7 +274,7 @@ Now we will configure the SonarQube server in Jenkins.
      - Assign a name to the token.
      - Click on **Generate Token** to create it.
 
-      ![sonarqube token genrate ]( )
+      ![sonarqube token genrate ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/sonarqube%20token%20genrate%201.png)
    
 5. **Copy the Token**:
    - After generating the token, copy it. This token will be needed for integrating SonarQube with Jenkins in the next steps.
@@ -653,9 +655,6 @@ Once logged in, it should look like this:
 Additionally, check SonarQube to see if there is something new.
 
 ![SonarQube Report](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/SonarQube%20Report.png)
-
-Finally, the project is done!
-
 
 
 ---
