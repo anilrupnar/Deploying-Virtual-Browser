@@ -5,7 +5,7 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
 
 ## Project Architecture Diagram
 
-   ![Project Architecture Diagram ]( )
+   ![Project Architecture Diagram ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Project%20Architecture%20Diagram.gif)
 
 ## Key Features
 - **Secure and Private Browsing**: Experience enhanced privacy and security with a dedicated virtual browser environment.
@@ -83,7 +83,7 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
    - Click on the **Inbound Rules** tab.
    - Click on **Edit inbound rules**.
    - Add the necessary rules for your application, such as:
-   ![security groups  ]( )  
+   ![security groups  ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/security%20groups%20.png )  
    
 ### 7. Connect to the Instance Using MobaXterm and `.pem` Key File
 
@@ -144,7 +144,7 @@ Before installing Jenkins, ensure that the Java Development Kit (JDK) is install
    If you are unable to see the Jenkins login page, check whether Jenkins is running in the terminal.
    
    After entering the IP address followed by `:8081` in the browser, the login page will appear, prompting for a password.
-   ![login page ]( )
+   ![login page ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/login%20page.png )
    
 To retrieve the password:
    ```bash
