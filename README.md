@@ -26,8 +26,9 @@
       <img src="https://github.com/m1k1o/neko/actions/workflows/ghcr-amd.yml/badge.svg" alt="build">
     </a>
   </p>
-  <img src="https://raw.githubusercontent.com/m1k1o/neko/master/docs/_media/intro.gif" width="650" height="auto"/>
+  
 </div>
+
 ## Overview
 Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC technology. This project provides a fully functional, secure, and private browser in a virtual environment, enabling users to browse the internet safely and collaborate remotely. With its multi-user access feature, Neko is ideal for both personal and professional use cases, including secure browsing, team collaboration, and virtual events like watch parties.
 
