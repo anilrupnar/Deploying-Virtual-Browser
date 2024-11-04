@@ -380,8 +380,77 @@ pipeline {
 - `withSonarQubeEnv('sonar') { … }`: Configures the SonarQube environment using the server setup named `sonar`.
 - `sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectkey=VirtualBrowser -Dsonar.projectName=VirtualBrowser'''`: Runs the SonarQube scanner with the specified project key and name.
 
+## Stage 10 : Docker Build & Tag Image
+
+- `stage("Docker Build & Tag image") { … }`: Defines a new stage in the pipeline to build and tag a Docker image.
+  
+- `steps { … }`: Contains the steps to be executed within this stage.
+
+- `script { … }`: Allows execution of Groovy script within the pipeline.
+
+- `withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') { … }`: Configures the Docker registry credentials to be used for pushing the Docker image. It specifies:
+  - `credentialsId`: The ID of the Docker registry credentials (`docker-cred`).
+  - `toolName`: Specifies the Docker tool (`docker`).
+
+- `dir('/home/ubuntu/.jenkins/workspace/virtual_browser/.docker/tor-browser') { … }`: Changes the working directory to the location containing the Dockerfile. This directory path might vary depending on the Jenkins workspace setup.
+
+- `sh "docker build -t harimohan8/virtual:latest ."`: Executes the Docker build command to create the Docker image. It uses the `-t` flag to specify the image tag as `harimohan8/virtual:latest`. The `.` at the end denotes that the Dockerfile is in the current directory.
+
+### Updated Pipeline Script with Docker Build Step
+
+```groovy
+pipeline {
+    agent any
 
 
+   environment {
+        SCANNER_HOME = tool 'sonar-scanner'
+        
+    }
+
+
+   stages {
+        stage('git-Checkout') {
+            steps {
+               
+                    git branch: 'main', url: 'https://github.com/anilrupnar/Virtual-Browser01.git'
+               
+            }
+        }
+
+
+       stage('Owasp Dependency Check') {
+            steps {
+                script {
+                    dependencyCheck additionalArguments: '--scan ./', odcInstallation: 'DC'
+                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                }
+            }
+        }
+
+       stage('SonarQube') {
+            steps {
+                script {
+                    withSonarQubeEnv('sonar') {
+                        sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=VirtualBrowser -Dsonar.projectName=VirtualBrowser"
+                    }
+                }
+            }
+        }
+        
+       stage('Docker Build and Tag') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'Docker') {
+                        dir('/var/lib/jenkins/workspace/Virtual-Browser/.docker/tor-browser')  {
+                            sh "docker build -t anilrupnar/vb:latest ."
+                        }
+                    }
+                }
+            }
+        }
+   }       
+}
 
 
 
