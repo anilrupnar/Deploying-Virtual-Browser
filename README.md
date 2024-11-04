@@ -100,6 +100,60 @@ To connect to the EC2 instance using MobaXterm and the `.pem` key file, follow t
 
 Click “Save rules” to apply the changes.
 
+# Step 2: Install Jenkins
+
+Before installing Jenkins, ensure that the Java Development Kit (JDK) is installed on the instance. For this purpose, we’ll install JDK 17 headless.
+
+1. **Install JDK 17 Headless**:
+   - Connect to the EC2 instance using SSH or any preferred method.
+   - Install JDK 17:
+     ```bash
+     sudo apt update  # Update the package index
+     sudo apt install openjdk-17-jdk  # Install JDK 17
+     ```
+   - Verify the installation by checking the Java version:
+     ```bash
+     java -version  # Check Java version
+     ```
+
+2. **Install Java Runtime Environment (JRE)**:
+   - Install the Java Runtime Environment:
+     ```bash
+     sudo apt install openjdk-17-jre  # Install JRE
+     ```
+
+3. **Download and Run Jenkins**:
+   - Download the Jenkins WAR file:
+     ```bash
+     wget https://get.jenkins.io/war-stable/2.426.2/jenkins.war  # Download Jenkins WAR file
+     ```
+   - Run Jenkins using Java:
+     ```bash
+     java -jar jenkins.war --httpPort=8081  # Start Jenkins on port 8081
+     ```
+
+4. **Access Jenkins**:
+   - Open Jenkins in your browser by copying the public IP address of the EC2 instance and pasting it into the address bar of your browser, followed by `:8081`. 
+   - Example: `publicIP:8081`
+   
+   If you are unable to see the Jenkins login page, check whether Jenkins is running in the terminal.
+
+After entering the IP address followed by `:8081` in the browser, the login page will appear, prompting for a password.
+
+To retrieve the password:
+- Access the terminal where your EC2 instance is open and run the command to display the initial admin password needed to proceed with the Jenkins setup.
+- Copy the code and paste it into the Jenkins Getting Started screen.
+- Follow the on-screen instructions to complete the setup. Once done, you’ll be directed to the Jenkins dashboard.
+
+# Step 3: Install Plugins in Jenkins
+
+Now, let’s install some plugins in Jenkins:
+- SonarQube Scanner
+- OWASP Dependency-Check
+- Docker
+- Docker Pipeline
+- Docker Build Step
+- Cloud Bees Docker Build and Publish
 
 
 
