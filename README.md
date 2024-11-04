@@ -3,6 +3,10 @@
 ## Overview
 Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC technology. This project provides a fully functional, secure, and private browser in a virtual environment, enabling users to browse the internet safely and collaborate remotely. With its multi-user access feature, Neko is ideal for both personal and professional use cases, including secure browsing, team collaboration, and virtual events like watch parties.
 
+## Project Architecture Diagram
+
+   ![Project Architecture Diagram ]( )
+
 ## Key Features
 - **Secure and Private Browsing**: Experience enhanced privacy and security with a dedicated virtual browser environment.
 - **WebRTC Technology**: Smooth streaming and interactivity for real-time collaboration.
@@ -79,7 +83,8 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
    - Click on the **Inbound Rules** tab.
    - Click on **Edit inbound rules**.
    - Add the necessary rules for your application, such as:
-   -
+   ![security groups  ]( )  
+   
 ### 7. Connect to the Instance Using MobaXterm and `.pem` Key File
 
 To connect to the EC2 instance using MobaXterm and the `.pem` key file, follow these steps:
@@ -137,10 +142,14 @@ Before installing Jenkins, ensure that the Java Development Kit (JDK) is install
    - Example: `publicIP:8081`
    
    If you are unable to see the Jenkins login page, check whether Jenkins is running in the terminal.
-
-After entering the IP address followed by `:8081` in the browser, the login page will appear, prompting for a password.
-
+   
+   After entering the IP address followed by `:8081` in the browser, the login page will appear, prompting for a password.
+   ![login page ]( )
+   
 To retrieve the password:
+   ```bash
+   sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+   ```
 - Access the terminal where your EC2 instance is open and run the command to display the initial admin password needed to proceed with the Jenkins setup.
 - Copy the code and paste it into the Jenkins Getting Started screen.
 - Follow the on-screen instructions to complete the setup. Once done, you’ll be directed to the Jenkins dashboard.
@@ -156,6 +165,7 @@ Now, let’s install some plugins in Jenkins:
 - Cloud Bees Docker Build and Publish
 
 ![Install Plugins in Jenkins ]( )
+
 ## Step 4: Install Docker and Set Up SonarQube
 
 Since Docker isn’t installed on our EC2 instance yet, let’s install Docker and Docker Compose, then set up SonarQube for code analysis.
