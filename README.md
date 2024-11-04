@@ -69,7 +69,7 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
 2. Choose the desired key pair from the dropdown list.
 3. Ensure you have access to the selected private key file.
 4. Click **Launch Instances** to create the instance.
-
+   ![EC2 Instance ]( )
 ### 6. Configure Security Group
 
 1. **Select or Create a Security Group**:
@@ -131,6 +131,8 @@ Before installing Jenkins, ensure that the Java Development Kit (JDK) is install
      ```bash
      wget https://get.jenkins.io/war-stable/2.426.2/jenkins.war  # Download Jenkins WAR file
      ```
+     ![Jenkins WAR ]( )
+     
    - Run Jenkins using Java:
      ```bash
      java -jar jenkins.war --httpPort=8081  # Start Jenkins on port 8081
@@ -194,6 +196,8 @@ Since Docker isn’t installed on our EC2 instance yet, let’s install Docker a
      docker run -d -p 9000:9000 sonarqube:lts-community  # Run SonarQube container
      ```
    - This command starts a SonarQube server in detached mode, mapping port 9000 on the host to port 9000 on the container. This setup enables us to perform code analysis and quality checks.
+     
+     ![Docker Output ]( )
 
 5. **Access SonarQube**:
    - You can access SonarQube’s web interface at `http://localhost:9000` or by replacing `localhost` with your EC2 instance's public IP address if accessing it remotely.
