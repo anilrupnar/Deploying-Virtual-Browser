@@ -83,6 +83,7 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
    - Click on the **Inbound Rules** tab.
    - Click on **Edit inbound rules**.
    - Add the necessary rules for your application, such as:
+     
    ![security groups  ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/security%20groups%20.png )  
    
 ### 7. Connect to the Instance Using MobaXterm and `.pem` Key File
@@ -102,8 +103,6 @@ To connect to the EC2 instance using MobaXterm and the `.pem` key file, follow t
    - If prompted with a security warning, confirm to proceed.
 5. **Successful Connection**:
    - You should now have access to your EC2 instance's terminal.
-
-Click “Save rules” to apply the changes.
 
 ## Step 2: Install Jenkins
 
@@ -144,6 +143,7 @@ Before installing Jenkins, ensure that the Java Development Kit (JDK) is install
    If you are unable to see the Jenkins login page, check whether Jenkins is running in the terminal.
    
    After entering the IP address followed by `:8081` in the browser, the login page will appear, prompting for a password.
+   
    ![login page ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/login%20page.png )
    
 To retrieve the password:
@@ -214,7 +214,7 @@ Now that Docker and SonarQube are installed on our EC2 instance, let’s configu
      - Check “Install automatically”
      - Select “Download from docker.com”
        
-     ![Configure Docker ](  )
+     ![Configure Docker ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Configure%20Docker.png)
      
 2. **Configure Dependency-Check**:
    - In the same **Global Tool Configuration** section, configure **Dependency-Check** as follows:
@@ -223,7 +223,7 @@ Now that Docker and SonarQube are installed on our EC2 instance, let’s configu
      - Select “Install from GitHub”
      - **Version**: `6.5.1`
 
-     ![Dependency-Check ]( )
+     ![Dependency-Check ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Dependency-Check.png)
        
 3. **Configure SonarQube Scanner**:
    - Still in the **Global Tool Configuration** section, configure **SonarQube Scanner** as follows:
@@ -232,7 +232,7 @@ Now that Docker and SonarQube are installed on our EC2 instance, let’s configu
      - Select “Install from Maven Central”
      - **Version**: `5.0.1.3006`
 
-     ![sonar Build ]( )
+     ![sonar Build ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/sonar%20Build.png)
 
 4. **Apply the Configuration**:
    - Once all configurations are set, click on **Apply** to save the changes.
@@ -257,7 +257,7 @@ Now we will configure the SonarQube server in Jenkins.
      - **Username**: `admin`
      - **Password**: `admin`
  
-    ![Sonarqube login ]( )
+    ![Sonarqube login ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Sonarqube%20login.png)
    
 4. **Generate a SonarQube Token**:
    - Once logged in, follow these steps:
@@ -273,7 +273,7 @@ Now we will configure the SonarQube server in Jenkins.
 5. **Copy the Token**:
    - After generating the token, copy it. This token will be needed for integrating SonarQube with Jenkins in the next steps.
 
-     ![sonarqube token copy ]( )
+     ![sonarqube token copy ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/sonarqube%20token%20copy.png)
 
 This token allows Jenkins to authenticate with your SonarQube server and perform code quality checks on your projects.
 
