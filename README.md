@@ -380,7 +380,7 @@ pipeline {
 - `withSonarQubeEnv('sonar') { … }`: Configures the SonarQube environment using the server setup named `sonar`.
 - `sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectkey=VirtualBrowser -Dsonar.projectName=VirtualBrowser'''`: Runs the SonarQube scanner with the specified project key and name.
 
-## Stage 10 : Docker Build & Tag Image
+## Stage 10: Docker Build & Tag Image
 
 - `stage("Docker Build & Tag image") { … }`: Defines a new stage in the pipeline to build and tag a Docker image.
   
@@ -451,9 +451,74 @@ pipeline {
         }
    }       
 }
+```
+## Stage 11: Installing Trivy on EC2 and Adding Scanning Stages to Jenkins Pipeline
+
+To enable Docker image scanning with Trivy, we’ll first install Trivy on the EC2 instance.
+
+```bash
+sudo apt-get install wget apt-transport-https gnupg lsb-release -y
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+sudo apt-get update
+sudo apt-get install trivy -y
+```
+### Adding Trivy and Docker Push to Jenkins Pipeline
+```bash 
+        stage("Trivy Docker Scan"){
+            steps{
+                sh "trivy image anilrupnar/vb:latest > trivy.txt" 
+            }
+        }  
+          
+        stage('Docker Build & Push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'Docker') {
+                        sh "docker push anilrupnar/vb:latest"
+                    }
+                }
+            }
+        }
+
+```
+## Stage 11: Now build Pipline
 
 
+## Stage 12: Final Deployment Steps
 
+To finalize the deployment and use the latest Docker image, update the `docker-compose.yml` file in your GitHub repository.
+
+1. **Edit `docker-compose.yml`**: Update the `image` section to reference the latest image.
+
+```yaml
+version: "3"
+services:
+  neko:
+    image: "harimohan8/virtual:latest"
+    restart: "unless-stopped"
+    shm_size: "2gb"
+    ports:
+      - "8082:8080"
+      - "52000-52100:52000-52100/udp"
+    environment:
+      NEKO_SCREEN: 1920x1080@30
+      NEKO_PASSWORD: neko
+      NEKO_PASSWORD_ADMIN: admin
+      NEKO_EPR: 52000-52100
+      NEKO_ICELITE: 1
+```
+## Add the Deploy Stage to the Jenkins Pipeline Script
+
+Add the `Deploy` stage in the Jenkins Pipeline script to use the updated `docker-compose.yml` file for deployment:
+
+```groovy
+stage("Deploy") {
+    steps {
+        sh "docker-compose up -d"
+    }
+}
+```
 
 
 
