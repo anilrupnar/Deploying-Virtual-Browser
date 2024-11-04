@@ -36,16 +36,16 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
 
 # 1 create EC2 Instance & security Groups 
 
-## 1. Sign in to AWS
+### 1. Sign in to AWS
 
 1. Access the [AWS Management Console](https://aws.amazon.com/console/) and log in with your credentials.
 
-## 2. Navigate to EC2 Dashboard
+### 2. Navigate to EC2 Dashboard
 
 1. In the AWS Console, select **Services** from the top menu.
 2. Under **Compute**, choose **EC2** to open the EC2 Dashboard.
 
-## 3. Launch an EC2 Instance
+### 3. Launch an EC2 Instance
 
 1. In the EC2 Dashboard, click **Launch Instances**.
 2. **Choose Amazon Machine Image (AMI)**:
@@ -53,20 +53,20 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
 3. **Choose Instance Type**:
    - For this setup, select **t2.large**.
 
-## 4. Configure Storage
+#### 4. Configure Storage
 
 1. Set **Storage** to 25 GB.
 2. Choose the **GP2 volume type** for optimal performance.
 3. Click **Next** to proceed with the instance details configuration.
 
-## 5. Select Key Pair
+### 5. Select Key Pair
 
 1. In the **Key Pair** section, select **Choose an existing key pair**.
 2. Choose the desired key pair from the dropdown list.
 3. Ensure you have access to the selected private key file.
 4. Click **Launch Instances** to create the instance.
 
-## 6. Configure Security Group
+### 6. Configure Security Group
 
 1. **Select or Create a Security Group**:
    - Choose an existing security group or create a new one that meets your requirements.
@@ -80,7 +80,7 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
    - Click on **Edit inbound rules**.
    - Add the necessary rules for your application, such as:
    -
-## 7. Connect to the Instance Using MobaXterm and `.pem` Key File
+### 7. Connect to the Instance Using MobaXterm and `.pem` Key File
 
 To connect to the EC2 instance using MobaXterm and the `.pem` key file, follow these steps:
 
@@ -100,7 +100,7 @@ To connect to the EC2 instance using MobaXterm and the `.pem` key file, follow t
 
 Click “Save rules” to apply the changes.
 
-# Step 2: Install Jenkins
+## Step 2: Install Jenkins
 
 Before installing Jenkins, ensure that the Java Development Kit (JDK) is installed on the instance. For this purpose, we’ll install JDK 17 headless.
 
@@ -145,7 +145,7 @@ To retrieve the password:
 - Copy the code and paste it into the Jenkins Getting Started screen.
 - Follow the on-screen instructions to complete the setup. Once done, you’ll be directed to the Jenkins dashboard.
 
-# Step 3: Install Plugins in Jenkins
+## Step 3: Install Plugins in Jenkins
 
 Now, let’s install some plugins in Jenkins:
 - SonarQube Scanner
@@ -155,7 +155,7 @@ Now, let’s install some plugins in Jenkins:
 - Docker Build Step
 - Cloud Bees Docker Build and Publish
 
-# Step 4: Install Docker and Set Up SonarQube
+## Step 4: Install Docker and Set Up SonarQube
 
 Since Docker isn’t installed on our EC2 instance yet, let’s install Docker and Docker Compose, then set up SonarQube for code analysis.
 
@@ -191,7 +191,7 @@ Since Docker isn’t installed on our EC2 instance yet, let’s install Docker a
 
    SonarQube will be available on port 9000, allowing you to perform code quality analysis on your projects.
 
-# Step 5: Configure Docker, Dependency-Check, and SonarQube Scanner in Jenkins
+## Step 5: Configure Docker, Dependency-Check, and SonarQube Scanner in Jenkins
 
 Now that Docker and SonarQube are installed on our EC2 instance, let’s configure them through Jenkins.
 
@@ -227,6 +227,32 @@ Now that Docker and SonarQube are installed on our EC2 instance, let’s configu
      ```
 This completes the configuration of Docker, Dependency-Check, and SonarQube Scanner in Jenkins. You can now use these tools within Jenkins for your CI/CD workflows.
 
+## Step 6: Configure SonarQube Server in Jenkins
+
+Now we will configure the SonarQube server in Jenkins.
+
+1. **Access SonarQube**:
+   - Copy the Public IP Address of your EC2 Instance.
+   - Since SonarQube operates on Port 9000, open your web browser and navigate to `<Public IP>:9000` to access the SonarQube server.
+
+2. **Login to SonarQube**:
+   - The default SonarQube username and password are:
+     - **Username**: `admin`
+     - **Password**: `admin`
+
+3. **Generate a SonarQube Token**:
+   - Once logged in, follow these steps:
+     - Go to **Administration**.
+     - Select **Security**.
+     - Click on **Users**.
+     - Navigate to **Tokens** and select **Update Token**.
+     - Assign a name to the token.
+     - Click on **Generate Token** to create it.
+
+4. **Copy the Token**:
+   - After generating the token, copy it. This token will be needed for integrating SonarQube with Jenkins in the next steps.
+
+This token allows Jenkins to authenticate with your SonarQube server and perform code quality checks on your projects.
 
 
 
