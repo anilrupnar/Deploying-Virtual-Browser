@@ -5,7 +5,7 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
 
 ## Project Architecture Diagram
 
-   ![Project Architecture Diagram ]( )
+   ![Project Architecture Diagram ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Project%20Architecture%20Diagram.gif)
 
 ## Key Features
 - **Secure and Private Browsing**: Experience enhanced privacy and security with a dedicated virtual browser environment.
@@ -69,7 +69,7 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
 2. Choose the desired key pair from the dropdown list.
 3. Ensure you have access to the selected private key file.
 4. Click **Launch Instances** to create the instance.
-
+   ![EC2 Instance ]( )
 ### 6. Configure Security Group
 
 1. **Select or Create a Security Group**:
@@ -83,7 +83,8 @@ Neko is an innovative, self-hosted virtual browser leveraging Docker and WebRTC 
    - Click on the **Inbound Rules** tab.
    - Click on **Edit inbound rules**.
    - Add the necessary rules for your application, such as:
-   ![security groups  ]( )  
+     
+   ![security groups  ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/security%20groups%20.png )  
    
 ### 7. Connect to the Instance Using MobaXterm and `.pem` Key File
 
@@ -102,8 +103,6 @@ To connect to the EC2 instance using MobaXterm and the `.pem` key file, follow t
    - If prompted with a security warning, confirm to proceed.
 5. **Successful Connection**:
    - You should now have access to your EC2 instance's terminal.
-
-Click “Save rules” to apply the changes.
 
 ## Step 2: Install Jenkins
 
@@ -132,6 +131,8 @@ Before installing Jenkins, ensure that the Java Development Kit (JDK) is install
      ```bash
      wget https://get.jenkins.io/war-stable/2.426.2/jenkins.war  # Download Jenkins WAR file
      ```
+     ![Jenkins WAR ]( )
+     
    - Run Jenkins using Java:
      ```bash
      java -jar jenkins.war --httpPort=8081  # Start Jenkins on port 8081
@@ -144,7 +145,8 @@ Before installing Jenkins, ensure that the Java Development Kit (JDK) is install
    If you are unable to see the Jenkins login page, check whether Jenkins is running in the terminal.
    
    After entering the IP address followed by `:8081` in the browser, the login page will appear, prompting for a password.
-   ![login page ]( )
+   
+   ![login page ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/login%20page.png )
    
 To retrieve the password:
    ```bash
@@ -194,6 +196,8 @@ Since Docker isn’t installed on our EC2 instance yet, let’s install Docker a
      docker run -d -p 9000:9000 sonarqube:lts-community  # Run SonarQube container
      ```
    - This command starts a SonarQube server in detached mode, mapping port 9000 on the host to port 9000 on the container. This setup enables us to perform code analysis and quality checks.
+     
+     ![Docker Output ]( )
 
 5. **Access SonarQube**:
    - You can access SonarQube’s web interface at `http://localhost:9000` or by replacing `localhost` with your EC2 instance's public IP address if accessing it remotely.
@@ -214,7 +218,7 @@ Now that Docker and SonarQube are installed on our EC2 instance, let’s configu
      - Check “Install automatically”
      - Select “Download from docker.com”
        
-     ![Configure Docker ](  )
+     ![Configure Docker ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Configure%20Docker.png)
      
 2. **Configure Dependency-Check**:
    - In the same **Global Tool Configuration** section, configure **Dependency-Check** as follows:
@@ -223,7 +227,7 @@ Now that Docker and SonarQube are installed on our EC2 instance, let’s configu
      - Select “Install from GitHub”
      - **Version**: `6.5.1`
 
-     ![Dependency-Check ]( )
+     ![Dependency-Check ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Dependency-Check.png)
        
 3. **Configure SonarQube Scanner**:
    - Still in the **Global Tool Configuration** section, configure **SonarQube Scanner** as follows:
@@ -232,7 +236,7 @@ Now that Docker and SonarQube are installed on our EC2 instance, let’s configu
      - Select “Install from Maven Central”
      - **Version**: `5.0.1.3006`
 
-     ![sonar Build ]( )
+     ![sonar Build ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/sonar%20Build.png)
 
 4. **Apply the Configuration**:
    - Once all configurations are set, click on **Apply** to save the changes.
@@ -257,7 +261,7 @@ Now we will configure the SonarQube server in Jenkins.
      - **Username**: `admin`
      - **Password**: `admin`
  
-    ![Sonarqube login ]( )
+    ![Sonarqube login ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Sonarqube%20login.png)
    
 4. **Generate a SonarQube Token**:
    - Once logged in, follow these steps:
@@ -273,7 +277,7 @@ Now we will configure the SonarQube server in Jenkins.
 5. **Copy the Token**:
    - After generating the token, copy it. This token will be needed for integrating SonarQube with Jenkins in the next steps.
 
-     ![sonarqube token copy ]( )
+     ![sonarqube token copy ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/sonarqube%20token%20copy.png)
 
 This token allows Jenkins to authenticate with your SonarQube server and perform code quality checks on your projects.
 
@@ -291,7 +295,7 @@ Now, we need to add the SonarQube token as a credential in Jenkins, as well as c
      - **Description**: `SonarQube token`
    - Click **Create** to finalize. Your SonarQube token is now added as a credential in Jenkins.
 
-      ![Sonar token ]( )
+      ![Sonar token ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/sonarqube%20token%20genrate.png )
 
 2. **Add Docker Credentials in Jenkins**:
    - Add credentials for Docker to enable Jenkins to push Docker images to a repository:
@@ -312,7 +316,7 @@ Now, we need to add the SonarQube token as a credential in Jenkins, as well as c
        - **Server authentication token**: `sonar-token` (select the SonarQube token created earlier)
      - Click **Apply** to save the changes.
    
-   ![Jenkins server ]( )
+   ![Jenkins server ](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Jenkins%20server%20.png)
 
 
 Your SonarQube and Docker credentials are now configured in Jenkins, and SonarQube is integrated with Jenkins to enable code quality analysis in your pipelines.
@@ -353,7 +357,7 @@ pipeline {
         stage('git-Checkout') {
             steps {
                
-                    git branch: 'main', url: 'https://github.com/anilrupnar/Virtual-Browser01.git'
+                    git branch: 'main', url: 'https://github.com/anilrupnar/Deploying-Virtual-Browser.git'
                
             }
         }
@@ -441,7 +445,7 @@ pipeline {
         stage('git-Checkout') {
             steps {
                
-                    git branch: 'main', url: 'https://github.com/anilrupnar/Virtual-Browser01.git'
+                    git branch: 'main', url: 'https://github.com/anilrupnar/Deploying-Virtual-Browser.git'
                
             }
         }
@@ -512,7 +516,7 @@ sudo apt-get install trivy -y
 ```
 ## Stage 11: Now build Pipline
 
-![Build stage optput](link_to_screenshot)
+![Build stage optput](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Build%20stage%20optput.png)
 
 ## Stage 12: Final Deployment Steps
 
@@ -548,7 +552,85 @@ stage("Deploy") {
     }
 }
 ```
-## Stage 13: Final stage 
+## Stage 14: Final Pipline Code 
+```bash
+   pipeline {
+    agent any
+
+
+   environment {
+        SCANNER_HOME = tool 'sonar-scanner'
+        
+    }
+
+
+   stages {
+        stage('git-Checkout') {
+            steps {
+               
+                    git branch: 'main', url: 'https://github.com/anilrupnar/Virtual-Browser01.git'
+               
+            }
+        }
+
+
+       stage('Owasp Dependency Check') {
+            steps {
+                script {
+                    dependencyCheck additionalArguments: '--scan ./', odcInstallation: 'DC'
+                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                }
+            }
+        }
+
+       stage('SonarQube') {
+            steps {
+                script {
+                    withSonarQubeEnv('sonar') {
+                        sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=VirtualBrowser -Dsonar.projectName=VirtualBrowser"
+                    }
+                }
+            }
+        }
+        
+       stage('Docker Build and Tag') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'Docker') {
+                        dir('/var/lib/jenkins/workspace/Virtual-Browser/.docker/tor-browser')  {
+                            sh "docker build -t anilrupnar/vb:latest ."
+                        }
+                    }
+                }
+            }
+        }
+          
+        stage("Trivy Docker Scan"){
+            steps{
+                sh "trivy image anilrupnar/vb:latest > trivy.txt" 
+            }
+        }  
+          
+        stage('Docker Build & Push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'Docker') {
+                        sh "docker push anilrupnar/vb:latest"
+                    }
+                }
+            }
+        }
+        stage("Deploy"){
+            steps{
+                sh "docker-compose up --verbose -d" 
+            }
+        }
+
+    }
+}    
+    
+```
+## Stage 14: Final stage 
 
 Now for the last and final test: whether our browser is working or not.
 
@@ -557,7 +639,7 @@ Now for the last and final test: whether our browser is working or not.
 
 Once logged in, it should look like this:
 
-![Final Output 3](link_to_screenshot)
+![Final Output 3](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Final%20Output%203.png)
 
 ## Login Credentials
 
@@ -565,12 +647,13 @@ Once logged in, it should look like this:
 - **Password**: admin
 
    
-![Final Output 1](link_to_screenshot)
+![Final Output 1](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/Final%20Output%202.png)
 
-![Final Output 2](link_to_screenshot)
 
 Additionally, check SonarQube to see if there is something new.
-![SonarQube Report](link_to_screenshot)
+
+![SonarQube Report](https://github.com/anilrupnar/Deploying-Virtual-Browser/blob/main/images/SonarQube%20Report.png)
+
 Finally, the project is done!
 
 
