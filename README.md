@@ -155,6 +155,7 @@ Now, let’s install some plugins in Jenkins:
 - Docker Build Step
 - Cloud Bees Docker Build and Publish
 
+![Install Plugins in Jenkins ]( )
 ## Step 4: Install Docker and Set Up SonarQube
 
 Since Docker isn’t installed on our EC2 instance yet, let’s install Docker and Docker Compose, then set up SonarQube for code analysis.
@@ -202,7 +203,9 @@ Now that Docker and SonarQube are installed on our EC2 instance, let’s configu
      - **Name**: `docker`
      - Check “Install automatically”
      - Select “Download from docker.com”
-
+       
+     ![Configure Docker ](  )
+     
 2. **Configure Dependency-Check**:
    - In the same **Global Tool Configuration** section, configure **Dependency-Check** as follows:
      - **Name**: `DC`
@@ -210,12 +213,16 @@ Now that Docker and SonarQube are installed on our EC2 instance, let’s configu
      - Select “Install from GitHub”
      - **Version**: `6.5.1`
 
+     ![Dependency-Check ]( )
+       
 3. **Configure SonarQube Scanner**:
    - Still in the **Global Tool Configuration** section, configure **SonarQube Scanner** as follows:
      - **Name**: `sonar`
      - Check “Install automatically”
      - Select “Install from Maven Central”
      - **Version**: `5.0.1.3006`
+
+     ![sonar Build ]( )
 
 4. **Apply the Configuration**:
    - Once all configurations are set, click on **Apply** to save the changes.
